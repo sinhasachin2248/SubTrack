@@ -1,0 +1,9 @@
+@model SubTrack.Models.Subscription
+@{ ViewData["Title"] = "Subscription details"; var days = (Model.NextRenewalDate.Date - DateTime.Today).Days; }
+
+<div class="container detail-page py-4">
+    <a asp-action="Index" class="back-link"><i class="bi bi-arrow-left"></i> Back to subscriptions</a>
+    <div class="page-heading mt-3 mb-4"><div><span class="eyebrow page-eyebrow"><i class="bi bi-credit-card-2-front-fill"></i> SUBSCRIPTION PROFILE</span><h1>@Model.Name</h1><p>@Model.Category · @Model.BillingCycle plan</p></div><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary primary-action"><i class="bi bi-pencil"></i> Edit subscription</a></div>
+    <div class="detail-hero-card mb-4"><div class="detail-price"><span>Current charge</span><strong>₹@Model.Price.ToString("N2")</strong><small>per @Model.BillingCycle.ToLowerInvariant() cycle</small></div><div class="detail-renewal"><span>Next renewal</span><strong>@Model.NextRenewalDate.ToString("dd MMM yyyy")</strong>@if (Model.IsActive && days < 0) { <em class="renewal-flag flag-overdue">@Math.Abs(days) days overdue</em> } else if (Model.IsActive && days == 0) { <em class="renewal-flag flag-today">Due today</em> } else if (Model.IsActive && days <= 7) { <em class="renewal-flag flag-soon">In @days days</em> } else { <small>Scheduled payment</small> }</div><span class="plan-status @(Model.IsActive ? "plan-active" : "plan-inactive")"><i class="bi bi-circle-fill"></i>@(Model.IsActive ? "Active" : "Cancelled")</span></div>
+    <div class="detail-card"><h2>Plan details</h2><div class="detail-grid"><div><span>Category</span><strong>@Model.Category</strong></div><div><span>Billing cycle</span><strong>@Model.BillingCycle</strong></div><div><span>Started on</span><strong>@Model.StartDate.ToString("dd MMM yyyy")</strong></div><div><span>Notes</span><strong>@(string.IsNullOrWhiteSpace(Model.Notes) ? "No notes added" : Model.Notes)</strong></div></div></div>
+</div>

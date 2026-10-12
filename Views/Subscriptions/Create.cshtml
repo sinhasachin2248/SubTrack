@@ -1,0 +1,44 @@
+@model SubTrack.Models.Subscription
+
+@{ ViewData["Title"] = "Add Subscription"; }
+
+<div class="container subscription-form-page py-4">
+    <a asp-action="Index" class="back-link"><i class="bi bi-arrow-left"></i> Back to subscriptions</a>
+    <div class="page-heading form-heading mt-3 mb-4"><div><span class="eyebrow page-eyebrow"><i class="bi bi-plus-circle-fill"></i> NEW RECURRING EXPENSE</span><h1>Add subscription</h1><p>Save the essentials now—SubTrack will keep it visible when renewal day comes around.</p></div></div>
+    <div class="row g-4 align-items-start">
+        <div class="col-lg-8">
+            <div class="subscription-form-card">
+                <div class="form-card-heading"><div><h2>Subscription details</h2><p>Fields marked with an asterisk are required.</p></div><i class="bi bi-card-checklist"></i></div>
+                <form asp-action="Create" method="post" class="subscription-form">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="validation-summary-errors mb-3"></div>
+                    <div class="row g-4">
+                        <div class="col-md-6"><label asp-for="Name" class="form-label">Subscription name <span>*</span></label><input asp-for="Name" class="form-control" placeholder="e.g. Netflix" /><span asp-validation-for="Name" class="text-danger"></span></div>
+                        <div class="col-md-6"><label asp-for="Category" class="form-label">Category <span>*</span></label><select asp-for="Category" class="form-select"><option value="">Select a category</option><option>Entertainment</option><option>Productivity</option><option>Music</option><option>Cloud Storage</option><option>Fitness</option><option>Education</option><option>Other</option></select><span asp-validation-for="Category" class="text-danger"></span></div>
+                        <div class="col-md-6"><label asp-for="Price" class="form-label">Price <span>*</span></label><div class="currency-input"><span>₹</span><input asp-for="Price" type="number" step="0.01" min="0.01" class="form-control" placeholder="649.00" /></div><span asp-validation-for="Price" class="text-danger"></span></div>
+                        <div class="col-md-6"><label asp-for="BillingCycle" class="form-label">Billing cycle <span>*</span></label><select asp-for="BillingCycle" class="form-select"><option value="Monthly">Monthly</option><option value="Yearly">Yearly</option></select><span asp-validation-for="BillingCycle" class="text-danger"></span></div>
+                        <div class="col-md-6"><label asp-for="StartDate" class="form-label">Start date <span>*</span></label><input asp-for="StartDate" type="date" class="form-control" /><span asp-validation-for="StartDate" class="text-danger"></span></div>
+                        <div class="col-md-6"><label asp-for="NextRenewalDate" class="form-label">Next renewal date <span>*</span></label><input asp-for="NextRenewalDate" type="date" class="form-control" /><span asp-validation-for="NextRenewalDate" class="text-danger"></span></div>
+                        <div class="col-12"><label asp-for="Notes" class="form-label">Notes <span class="optional">Optional</span></label><textarea asp-for="Notes" class="form-control" rows="4" placeholder="Anything useful to remember about this plan?"></textarea><span asp-validation-for="Notes" class="text-danger"></span></div>
+                        <div class="col-12"><label class="active-toggle"><input asp-for="IsActive" class="form-check-input" /><span><strong>Subscription is active</strong><small>Include it in current spending and renewal tracking.</small></span></label></div>
+                    </div>
+                    <div class="form-actions"><button type="submit" class="btn btn-primary primary-action"><i class="bi bi-check-lg"></i> Save subscription</button><a asp-action="Index" class="btn btn-light">Cancel</a></div>
+                </form>
+            </div>
+        </div>
+        <aside class="col-lg-4">
+            <div class="subscription-art" aria-hidden="true">
+                <span class="art-orb orb-one"></span><span class="art-orb orb-two"></span>
+                <i class="bi bi-tv-fill art-icon art-tv"></i>
+                <i class="bi bi-music-note-beamed art-icon art-music"></i>
+                <i class="bi bi-activity art-icon art-fitness"></i>
+                <i class="bi bi-book-fill art-icon art-book"></i>
+                <i class="bi bi-briefcase-fill art-icon art-work"></i>
+                <i class="bi bi-cloud-fill art-icon art-cloud"></i>
+                <div class="art-caption"><span class="eyebrow">SUBTRACK</span><strong>Every plan.<br />One clear view.</strong></div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

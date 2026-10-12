@@ -1,0 +1,4 @@
+@model SubTrack.Models.Subscription
+@{ ViewData["Title"] = "Delete subscription"; }
+
+<div class="container delete-page py-5"><div class="delete-card mx-auto"><div class="delete-icon"><i class="bi bi-trash3-fill"></i></div><span class="eyebrow">REMOVE SUBSCRIPTION</span><h1>Delete @Model.Name?</h1><p>This permanently removes the subscription and its renewal tracking. This cannot be undone.</p><div class="delete-plan"><span>@Model.Category</span><strong>@Model.Name</strong><small>₹@Model.Price.ToString("N2") · @Model.BillingCycle · Renews @Model.NextRenewalDate.ToString("dd MMM yyyy")</small></div><form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-flex gap-2"><input type="hidden" asp-for="Id" /><button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i> Delete permanently</button><a asp-action="Index" class="btn btn-light">Keep subscription</a></form></div></div>

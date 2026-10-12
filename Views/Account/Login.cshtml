@@ -1,0 +1,21 @@
+@model SubTrack.ViewModels.LoginViewModel
+@{ ViewData["Title"] = "Sign in"; }
+
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-icon"><i class="bi bi-shield-lock-fill"></i></div>
+        <span class="eyebrow page-eyebrow">WELCOME BACK</span>
+        <h1>Sign in to SubTrack</h1>
+        <p>See your subscriptions, spending, and upcoming renewals.</p>
+        <form asp-action="Login" method="post" class="auth-form">
+            @Html.AntiForgeryToken()
+            <input asp-for="ReturnUrl" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="validation-summary-errors mb-3"></div>
+            <div class="mb-3"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" placeholder="you@example.com" /><span asp-validation-for="Email" class="text-danger"></span></div>
+            <div class="mb-3"><label asp-for="Password" class="form-label"></label><input asp-for="Password" class="form-control" placeholder="Your password" /><span asp-validation-for="Password" class="text-danger"></span></div>
+            <label class="form-check mb-4"><input asp-for="RememberMe" class="form-check-input" /> Remember me</label>
+            <button type="submit" class="btn btn-primary w-100 primary-action justify-content-center">Sign in <i class="bi bi-arrow-right"></i></button>
+        </form>
+        <p class="auth-switch">New to SubTrack? <a asp-action="Register">Create an account</a></p>
+    </div>
+</div>

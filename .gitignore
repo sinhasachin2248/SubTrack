@@ -1,0 +1,17 @@
+# Build output and local tooling
+bin/
+obj/
+.vs/
+.tools/
+
+# User-specific IDE files
+*.user
+*.suo
+
+# Local configuration and secrets
+appsettings.Development.json
+secrets.json
+
+# OS files
+.DS_Store
+Thumbs.db
